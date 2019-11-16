@@ -6,7 +6,7 @@
 /*   By: ylegzoul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 18:21:47 by ylegzoul          #+#    #+#             */
-/*   Updated: 2019/11/14 16:00:21 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2019/11/16 19:14:02 by ylegzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ int		get_next_line(int fd, char **line)
 		return (-1);
 	size_line = 0;
 	if (!(str[size_line]))
+	{
+		//(*line) <--- '\0'
 		return (0);
+	}
 	while (str[size_line] && str[size_line] != '\n')
 		size_line++;
 	(*line) = ft_substr(str, 0, size_line);
