@@ -6,7 +6,7 @@
 /*   By: ylegzoul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 18:21:44 by ylegzoul          #+#    #+#             */
-/*   Updated: 2019/11/14 14:36:52 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2019/11/17 15:24:10 by ylegzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,12 @@ int					len_substr(char const *s, unsigned int start, size_t len)
 		return (ft_strlen(&s[start]));
 }
 
-char				*ret_error(char *ret)
+char				*ret_error(void)
 {
-	ret = malloc(sizeof(char));
+	char *ret;
+
+	if (!(ret = malloc(sizeof(char))))
+		return (NULL);
 	ret[0] = '\0';
 	return (ret);
 }
@@ -62,9 +65,9 @@ char				*ft_substr(char const *s, unsigned int start, size_t len)
 
 	ret = NULL;
 	if (!s || !len)
-		return (ret_error(ret));
+		return (ret_error());
 	if (start >= len || start >= ft_strlen(s))
-		return (ret_error(ret));
+		return (ret_error());
 	size = len_substr(s, start, len);
 	ret = (char *)malloc(sizeof(char) * (size + 1));
 	if (ret == 0)

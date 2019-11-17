@@ -6,7 +6,7 @@
 /*   By: ylegzoul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 18:21:52 by ylegzoul          #+#    #+#             */
-/*   Updated: 2019/11/11 19:50:24 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2019/11/17 15:22:48 by ylegzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int				get_next_line(int fd, char **line);
 char			*read_line(int fd, char *str);
 int				backslash_n(char *str);
 int				len_substr(char const *s, unsigned int start, size_t len);
-char			*ret_error(char *ret);
+char			*ret_error(void);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 unsigned int	ft_strlen(char const *str);
 
