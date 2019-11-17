@@ -12,6 +12,26 @@
 
 #include "get_next_line.h"
 
+size_t				ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
+
+char				*ft_subnull(void)
+{
+	char *ret;
+
+	if (!(ret = malloc(sizeof(char))))
+		return (NULL);//------------------------------------------------------->> MALLOC
+	ret[0] = '\0';
+	return (ret);
+}
+
 char				*ft_strjoin(char const *s1, char const *s2)
 {
 	char		*ret;
@@ -21,7 +41,7 @@ char				*ft_strjoin(char const *s1, char const *s2)
 	i = ft_strlen(s1);
 	j = ft_strlen(s2);
 	ret = (void *)malloc(sizeof(char) * (i + j + 1));
-	if (ret == 0)
+	if (ret == 0)//------------------------------------------------------------>> MALLOC
 		return (NULL);
 	i = 0;
 	j = 0;
@@ -39,56 +59,30 @@ char				*ft_strjoin(char const *s1, char const *s2)
 	return (ret);
 }
 
-int					len_substr(char const *s, unsigned int start, size_t len)
+char		*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	if (ft_strlen(&s[start]) > len)
-		return ((int)len);
-	else
-		return (ft_strlen(&s[start]));
-}
+	char			*s2;
+	size_t			j;
 
-char				*ret_error(void)
-{
-	char *ret;
-
-	if (!(ret = malloc(sizeof(char))))
-		return (NULL);
-	ret[0] = '\0';
-	return (ret);
-}
-
-char				*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	char		*ret;
-	int			i;
-	int			size;
-
-	ret = NULL;
-	if (!s || !len)
-		return (ret_error());
-	if (start >= len || start >= ft_strlen(s))
-		return (ret_error());
-	size = len_substr(s, start, len);
-	ret = (char *)malloc(sizeof(char) * (size + 1));
-	if (ret == 0)
-		return (NULL);
-	i = 0;
-	while (s[start] != '\0' && i < size)
+	j = 0;
+	s2 = 0;
+	if (len == 0 || s == 0)
+		return (ft_subnull());
+	while (s[j] && j < start)
+		j++;
+	if (j != start)
+		return (ft_subnull());
+	j = 0;
+	while (s[start + j] && j < len)
+		j++;
+	if (!(s2 = malloc(j + 1))) //---------------------------------------------->> MALLOC
+		return (0);
+	j = 0;
+	while (s[start + j] && j < len)
 	{
-		ret[i] = s[start];
-		i++;
-		start++;
+		s2[j] = s[j + start];
+		j++;
 	}
-	ret[i] = '\0';
-	return (ret);
-}
-
-unsigned int		ft_strlen(char const *str)
-{
-	unsigned int		i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
+	s2[j] = 0;
+	return (s2);
 }

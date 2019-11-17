@@ -19,13 +19,15 @@
 # include <stdio.h>
 # include <string.h>
 
-char			*ft_strjoin(char const *s1, char const *s2);
 int				get_next_line(int fd, char **line);
-char			*read_line(int fd, char *str);
-int				backslash_n(char *str);
-int				len_substr(char const *s, unsigned int start, size_t len);
-char			*ret_error(void);
+int				ft_check_error(int fd, char **str, char **line);
+int				ft_newline(char *str);
+char			*ft_readline(int fd, char *str);
+void			ft_buffer_cpy(char **str, int size_line);
+
+size_t			ft_strlen(char const *str);
+char			*ft_subnull(void);
+char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
-unsigned int	ft_strlen(char const *str);
 
 #endif

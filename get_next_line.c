@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-int		backslash_n(char *str)
+int		ft_newline(char *str)
 {
 	int		i;
 
@@ -26,14 +26,14 @@ int		backslash_n(char *str)
 	return (0);
 }
 
-char	*read_line(int fd, char *str)
+char	*ft_readline(int fd, char *str)
 {
 	int		ret;
 	char	buffer[BUFFER_SIZE + 1];
 	char	*temp;
 
 	ret = 1;
-	while (backslash_n(str) == 0 && ret > 0)
+	while (ft_newline(str) == 0 && ret > 0)
 	{
 		ret = read(fd, buffer, BUFFER_SIZE);
 		if (ret == -1)
@@ -57,13 +57,13 @@ int		ft_check_error(int fd, char **str, char **line)
 	if (!(*str))
 	{
 		if (!(*str = (char *)malloc(sizeof(char *) * (BUFFER_SIZE + 1))))
-			return (0);
+			return (0); //--------------------------------------------------->> MALLOC
 		(*str)[0] = '\0';
 	}
 	return (1);
 }
 
-void	buff_copy(char **str, int size_line)
+void	ft_buffer_cpy(char **str, int size_line)
 {
 	int		i;
 
@@ -83,18 +83,18 @@ int		get_next_line(int fd, char **line)
 
 	if (!ft_check_error(fd, &str, line))
 		return (-1);
-	if ((str = read_line(fd, str)) == NULL)
+	if ((str = ft_readline(fd, str)) == NULL)
 		return (-1);
 	size_line = 0;
-	if (!((*line) = ret_error()))
+	if (!((*line) = ft_subnull()))
 		return (-1);
 	if (!(str[size_line]))
 		return (0);
 	while (str[size_line] && str[size_line] != '\n')
 		size_line++;
 	(*line) = ft_substr(str, 0, size_line);
-	if (backslash_n(str) == 1)
-		buff_copy(&str, size_line);
+	if (ft_newline(str) == 1)
+		ft_buffer_cpy(&str, size_line);
 	else
 	{
 		free(str);
