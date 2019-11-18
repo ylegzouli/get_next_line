@@ -6,7 +6,7 @@
 /*   By: ylegzoul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 18:21:47 by ylegzoul          #+#    #+#             */
-/*   Updated: 2019/11/17 15:19:51 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2019/11/18 16:50:12 by ylegzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		ft_check_error(int fd, char **str, char **line)
 	if (!(*str))
 	{
 		if (!(*str = (char *)malloc(sizeof(char *) * (BUFFER_SIZE + 1))))
-			return (0); //--------------------------------------------------->> MALLOC
+			return (0);
 		(*str)[0] = '\0';
 	}
 	return (1);
@@ -86,13 +86,11 @@ int		get_next_line(int fd, char **line)
 	if ((str = ft_readline(fd, str)) == NULL)
 		return (-1);
 	size_line = 0;
-	if (!((*line) = ft_subnull()))
-		return (-1);
-	if (!(str[size_line]))
-		return (0);
 	while (str[size_line] && str[size_line] != '\n')
 		size_line++;
 	(*line) = ft_substr(str, 0, size_line);
+	if (!(str[0]))
+		return (0);
 	if (ft_newline(str) == 1)
 		ft_buffer_cpy(&str, size_line);
 	else
